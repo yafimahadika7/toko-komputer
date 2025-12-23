@@ -13,7 +13,7 @@ if ($route === 'logout') {
   ensure_session();
   session_unset();
   session_destroy();
-  header('Location: ' . BASE_URL . '/public/index.php?route=login');
+  header('Location: ' . BASE_URL . '/index.php?route=login');
   exit;
 }
 
@@ -29,18 +29,18 @@ if ($route === 'login') {
 
     if (!$u) {
       flash_set('error', 'User not found.');
-      header('Location: ' . BASE_URL . '/public/index.php?route=login'); exit;
+      header('Location: ' . BASE_URL . '/index.php?route=login'); exit;
     }
     if ((int)$u['is_active'] !== 1) {
       flash_set('error', 'User inactive.');
-      header('Location: ' . BASE_URL . '/public/index.php?route=login'); exit;
+      header('Location: ' . BASE_URL . '/index.php?route=login'); exit;
     }
 
     // DEV MODE: plain password_hash column stores plain password
     // (You can switch to bcrypt later.)
     if ($password !== (string)$u['password_hash']) {
       flash_set('error', 'Invalid password.');
-      header('Location: ' . BASE_URL . '/public/index.php?route=login'); exit;
+      header('Location: ' . BASE_URL . '/index.php?route=login'); exit;
     }
 
     $_SESSION['user'] = [
